@@ -1,5 +1,7 @@
+// requrire mysql2
 const mysql = require('mysql2');
 
+// create connection to database
 const db = mysql.createConnection({
     host: 'localhost',
     user: process.env.DB_USER,
@@ -7,4 +9,5 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME
 })
 
+// export database for use
 module.exports = db;
