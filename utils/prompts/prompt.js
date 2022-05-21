@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 
 // require action functions
-const { viewDepartments } = require('./actions');
+const { viewDepartments } = require('../actions');
 
 const actionChoices = () => {
     return inquirer
@@ -12,7 +12,7 @@ const actionChoices = () => {
             name: 'action',
             message: 'What action would you like to perform?',
             choices: [
-                'View all departements',
+                'View all departments',
                 'View all roles',
                 'View all employees',
                 'Add a departement',
@@ -24,8 +24,8 @@ const actionChoices = () => {
     ])
     .then(act => {
         const {action} = act;
-
         // call function based on selected action
+        console.log(action);
         switch (action) {
             case 'View all departments': 
                 return viewDepartments();
@@ -33,4 +33,4 @@ const actionChoices = () => {
     })
 }
 
-module.exports = { actionChoices }
+module.exports = actionChoices; 
