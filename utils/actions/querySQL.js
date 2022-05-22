@@ -2,7 +2,7 @@ const db = require('../../config/connection');
 
 // intake sql query and paramters
 const querySQL = (sql, params) => {
-    db.query(sql, params, async (err, rows) => {
+    db.query(sql, params, (err, rows) => {
         if (err) {
             console.log(err);
             return;

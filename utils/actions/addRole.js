@@ -16,7 +16,7 @@ const addRole = () => {
         {
             name: 'departmentId',
             type: 'number',
-            message: 'Enter the department id of the role:'
+            message: 'Enter the department ID of the role:'
         }
     ])
 }
