@@ -11,4 +11,4 @@ db.connect(err => {
 })
 
 actionChoices()
-.then(data => console.log(data));
+// .then(data => console.log(data));

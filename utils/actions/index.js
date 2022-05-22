@@ -1,6 +1,10 @@
-const viewDepartments = require('./viewDepartments');
+const querySQL = require('./querySQL');
+const addDepartment = require('./addDepartment');
+const addRole = require('./addRole');
 
 
 module.exports = { 
-    viewDepartments,
+    querySQL,
+    addDepartment,
+    addRole
 }
