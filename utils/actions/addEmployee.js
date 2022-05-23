@@ -1,6 +1,25 @@
 const inquirer = require('inquirer');
+const { query } = require('../../config/connection');
+const querySQL = require('./querySQL');
 
-const addEmployee = () => {
+const addEmployee = async () => {
+    
+    const roles = await querySQL(`SELECT * FROM role;`);
+    const roleArray = roles.map(value => {
+        return {
+            name: value.title,
+            value: value.id
+        }
+    })
+
+    const employees = await querySQL(`SELECT * FROM employee;`, null, true);
+    const employeeArray = employees.map(value => {
+        return {
+            name: `${value.first_name} ${value.last_name}`,
+            value: value.id
+        }
+    })
+
     return inquirer
     .prompt([
         {
@@ -15,13 +34,15 @@ const addEmployee = () => {
         },
         {
             name: 'roleId',
-            type: 'number',
-            message: "Enter the employee's role ID:"
+            type: 'list',
+            message: "Select the employee's role:",
+            choices: roleArray
         },
         {
             name: 'managerId',
-            type: 'number',
-            message: "Enter the ID of the employee's manager:"
+            type: 'list',
+            message: "Select the employee's manager:",
+            choices: employeeArray
         }
     ])
 }

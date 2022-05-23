@@ -36,17 +36,17 @@ const actionChoices = () => {
             case 'View all departments': 
                 sql = `SELECT * FROM department;`
                 // make an SQL query
-                return querySQL(sql);
+                return querySQL(sql, null, true);
             
             case 'View all roles': 
                 sql = `SELECT * FROM role;`
                 // make an SQL query
-                return querySQL(sql);
+                return querySQL(sql, null, true);
 
             case 'View all employees':
                 sql =  `SELECT * FROM employee;`
                 // make an SQL query
-                return querySQL(sql);
+                return querySQL(sql, null, true);
 
             case 'Add a department':
                 sql = `

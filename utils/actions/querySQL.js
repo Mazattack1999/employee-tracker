@@ -1,7 +1,7 @@
 const db = require('../../config/connection');
 
 // intake sql query and paramters
-const querySQL = async (sql, params) => {
+const querySQL = async (sql, params, displayTable) => {
     // create promise to await db change/get
     let res = null;
     const query = new Promise((resolve, reject) => {
@@ -10,8 +10,8 @@ const querySQL = async (sql, params) => {
                 console.log(err);
                 return reject();
             }
-            // output table of sql query result if contains 'SELECT'
-            if (sql.includes('SELECT')){
+            // output table if displayTable is true
+            if (displayTable){
                 console.table(rows);
             }
             res = rows;
