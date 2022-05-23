@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const querySQL = require('./querySQL');
 
-const addEmployee = async () => {
+const updateEmployee = async() => {
     // query all current roles and employees to use as answer choices
     const roles = await querySQL(`SELECT * FROM role;`);
     const roleArray = roles.map(value => {
@@ -22,28 +22,18 @@ const addEmployee = async () => {
     return inquirer
     .prompt([
         {
-            name: 'firstName',
-            type: 'input',
-            message: "Enter the employee's first name:"
-        },
-        {
-            name: 'lastName',
-            type: 'input',
-            message: "Enter the employee's last name:"
-        },
-        {
-            name: 'roleId',
+            name: 'employee',
             type: 'list',
-            message: "Select the employee's role:",
-            choices: roleArray
-        },
-        {
-            name: 'managerId',
-            type: 'list',
-            message: "Select the employee's manager:",
+            message: 'Select an employee to edit:',
             choices: employeeArray
+        },
+        {
+            name: 'role',
+            type: 'list',
+            message: 'Select a new role for the employee:',
+            choices: roleArray
         }
     ])
 }
 
-module.exports = addEmployee;
+module.exports = updateEmployee;

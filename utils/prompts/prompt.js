@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 // const { query } = require('../../config/connection');
 
 // require action functions
-const { querySQL, addDepartment, addRole, addEmployee } = require('../actions');
+const { querySQL, addDepartment, addRole, addEmployee, updateEmployee } = require('../actions');
 
 // require promptAction function
 const promptAction = require('./promptAction');
@@ -82,6 +82,16 @@ const actionChoices = () => {
                     querySQL(sql, Object.values(params));
                     const {firstName, lastName} = params;
                     console.log(`Added ${firstName} ${lastName} to the database`);
+                })
+
+            case 'Update an employee role':
+                sql =  `
+                UPDATE employee SET manager_id = ? WHERE id = ?;`;
+                return updateEmployee()
+                .then(params => {
+                    // convert Answer object to array of params values
+                    querySQL(sql, Object.values(params));
+                    console.log(params);
                 })
         }
     })
