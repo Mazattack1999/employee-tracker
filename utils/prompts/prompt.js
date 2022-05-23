@@ -79,19 +79,20 @@ const actionChoices = () => {
                 return addEmployee()
                 .then(params => {
                     // convert Question object to array of params values
-                    querySQL(sql, Object.values(params));
+                    querySQL(sql, Object.values(params), false);
                     const {firstName, lastName} = params;
                     console.log(`Added ${firstName} ${lastName} to the database`);
                 })
 
             case 'Update an employee role':
                 sql =  `
-                UPDATE employee SET manager_id = ? WHERE id = ?;`;
+                UPDATE employee SET role_id = ? WHERE id = ?;`;
                 return updateEmployee()
                 .then(params => {
-                    // convert Answer object to array of params values
-                    querySQL(sql, Object.values(params));
                     console.log(params);
+                    // convert Answer object to array of params values
+                    querySQL(sql, Object.values(params).reverse());
+                    console.log('Employee updated');
                 })
         }
     })

@@ -11,7 +11,7 @@ const addEmployee = async () => {
         }
     })
 
-    const employees = await querySQL(`SELECT * FROM employee;`, null, true);
+    const employees = await querySQL(`SELECT * FROM employee;`, null);
     const employeeArray = employees.map(value => {
         return {
             name: `${value.first_name} ${value.last_name}`,
