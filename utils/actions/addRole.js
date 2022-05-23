@@ -1,6 +1,15 @@
 const inquirer = require('inquirer');
+const querySQL = require('./querySQL');
 
-const addRole = () => {
+const addRole = async () => {
+    // query for departments
+    const sql = `SELECT * FROM department;`;
+    const departments = await querySQL(sql);
+    const departmentArray = departments.map(value => {
+        const {name} = value;
+        return name;
+    })
+
     return inquirer
     .prompt([
         {
@@ -15,10 +24,16 @@ const addRole = () => {
         },
         {
             name: 'departmentId',
-            type: 'number',
-            message: 'Enter the department ID of the role:'
+            type: 'list',
+            message: 'Select a department:',
+            choices: departmentArray
         }
     ])
+    .then(data => {
+        // get index of selected value
+        data.departmentId = departmentArray.indexOf(data.departmentId) + 1;
+        return data;
+    })
 }
 
 module.exports = addRole;

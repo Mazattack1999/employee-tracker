@@ -86,9 +86,13 @@ const actionChoices = () => {
         }
     })
     .then(data => {
-        if (promptAction()){
-            return actionChoices();
-        }
+        return promptAction()
+        .then(ans => {
+            if (ans){
+                actionChoices();
+            }
+            return;
+        })
     });
 }
 
